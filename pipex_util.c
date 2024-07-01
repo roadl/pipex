@@ -6,7 +6,7 @@
 /*   By: yojin <yojin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:42:24 by yojin             #+#    #+#             */
-/*   Updated: 2024/05/20 20:06:35 by yojin            ###   ########.fr       */
+/*   Updated: 2024/07/01 18:04:27 by yojin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ int	add_node(t_arg *args, char *command, char *argv[])
 	content = (t_info *)malloc(sizeof(t_info));
 	if (!content)
 		return (0);
-	content->command = command;
 	content->argv = argv;
+	free(content->argv[0]);
+	content->argv[0] = command;
 	node = ft_lstnew(content);
 	if (!node)
 		error_exit();
@@ -45,7 +46,6 @@ void	del_node(void *content)
 	t_info	*info;
 
 	info = (t_info *)content;
-	free(info->command);
 	free_strs(info->argv);
 	free(content);
 }

@@ -6,7 +6,7 @@
 /*   By: yojin <yojin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 14:34:07 by yojin             #+#    #+#             */
-/*   Updated: 2024/05/20 19:02:39 by yojin            ###   ########.fr       */
+/*   Updated: 2024/07/01 18:02:33 by yojin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct s_arg
 
 typedef struct s_info
 {
-	char	*command;
 	char	**argv;
 	int		read_fd;
 	int		write_fd;
