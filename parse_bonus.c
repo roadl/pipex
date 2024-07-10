@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   parse_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yojin <yojin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:16:47 by yojin             #+#    #+#             */
-/*   Updated: 2024/07/10 17:14:55 by yojin            ###   ########.fr       */
+/*   Updated: 2024/07/10 17:33:30 by yojin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ char	*join_path(char *path, char *command)
 
 void	check_arg(int argc)
 {
-	if (argc != 5)
+	if (argc <= 5)
 	{
-		ft_putstr_fd("pipex: argument count must be 5\n", STDERR_FILENO);
+		ft_putstr_fd("pipex: argument count less than 5\n", STDERR_FILENO);
 		exit(EXIT_FAILURE);
 	}
 }
