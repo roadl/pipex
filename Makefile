@@ -6,7 +6,7 @@
 #    By: yojin <yojin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/12 17:18:23 by yojin             #+#    #+#              #
-#    Updated: 2024/07/10 17:32:32 by yojin            ###   ########.fr        #
+#    Updated: 2024/07/17 16:57:59 by yojin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,13 +16,14 @@ LDIR = ./
 FT_PRINTF = libftprintf.a
 FT_PRINTF_DIR = ./ft_printf
 HEADER = ./pipex.h
-SRCS = pipex.c parse.c pipex_util.c debug.c
+SRCS = pipex.c parse.c pipex_util.c
 OBJS = $(SRCS:.c=.o)
 NAME = pipex
 
-BONUS_HEADER = pipex_bonus.h
+BONUS_SDIR = bonus_file/
+BONUS_HEADER = bonus/pipex_bonus.h
 BONUS_SRCS = pipex_bonus.c parse_bonus.c pipex_util_bonus.c
-BONUS_OBJS = $(BONUS_SRCS:.c=.o)
+BONUS_OBJS = $(addprefix $(BONUS_SDIR), $(BONUS_SRCS:.c=.o))
 
 all: $(NAME)
 

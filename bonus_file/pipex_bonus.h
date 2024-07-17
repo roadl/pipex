@@ -6,7 +6,7 @@
 /*   By: yojin <yojin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 14:34:07 by yojin             #+#    #+#             */
-/*   Updated: 2024/07/10 17:32:57 by yojin            ###   ########.fr       */
+/*   Updated: 2024/07/17 16:58:23 by yojin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,5 @@ void	del_node(void *content);
 void	error_exit(void);
 
 int		init_arg(int argc, char **argv, char **envp, t_arg *arg);
-
-void	print_status(t_arg *args);
-void	f(void);
 
 #endif

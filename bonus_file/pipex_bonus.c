@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yojin <yojin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 13:42:58 by yojin             #+#    #+#             */
-/*   Updated: 2024/07/10 17:13:23 by yojin            ###   ########.fr       */
+/*   Updated: 2024/07/17 17:07:47 by yojin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,14 @@ void	execute_command(t_arg *arg, t_info *info)
 		error_exit();
 	close(info->read_fd);
 	close(info->write_fd);
-	if (access(info->argv[0], X_OK) != 0 || *(arg->envp) == NULL)
-		error_exit();
-	if (execve(info->argv[0], info->argv, arg->envp))
+	if (access(info->argv[0], X_OK) != 0)
+	{
+		ft_putstr_fd("pipex: command not found: ", STDERR_FILENO);
+		ft_putstr_fd(info->argv[0], STDERR_FILENO);
+		ft_putstr_fd("\n", STDERR_FILENO);
+		exit(EXIT_FAILURE);
+	}
+	if (*(arg->envp) == NULL || execve(info->argv[0], info->argv, arg->envp))
 		error_exit();
 	return ;
 }
@@ -40,18 +45,12 @@ int	run_child_process(t_arg *arg, int *fd, t_list *node)
 		if (node->next)
 			close(fd[READ]);
 		else
-		{
 			info->write_fd = open(arg->outfile, \
 				O_WRONLY | O_CREAT | O_TRUNC, 0644);
-			if (info->write_fd < 0)
-				error_exit();
-		}
 		if (node == arg->commands->next)
-		{
 			info->read_fd = open(arg->infile, O_RDONLY);
-			if (info->read_fd < 0)
-				error_exit();
-		}
+		if (info->read_fd < 0 || info->write_fd < 0)
+			error_exit();
 		execute_command(arg, info);
 	}
 	return (pid);
@@ -69,10 +68,8 @@ int	pipex(t_arg *arg)
 	{
 		info = node->content;
 		if (node != arg->commands->next)
-		{
 			info->read_fd = fd[READ];
-			close(fd[WRITE]);
-		}
+		close(fd[WRITE]);
 		if (node->next && pipe(fd) == -1)
 			error_exit();
 		if (node->next)
